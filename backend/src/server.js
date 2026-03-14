@@ -12,6 +12,8 @@ const productRoutes = require("./routes/productRoutes");
 
 const orderRoutes = require("./routes/orderRoutes");
 
+const dashboardRoutes = require("./routes/dashboardRoutes");
+
 dotenv.config();
 
 const app = express();
@@ -25,6 +27,8 @@ app.use("/api/purchase", purchaseRoutes);
 app.use("/api/products", productRoutes);
 
 app.use("/api/orders", orderRoutes);
+
+app.use("/api/dashboard", dashboardRoutes);
 
 
 app.get("/", (req, res) => {
