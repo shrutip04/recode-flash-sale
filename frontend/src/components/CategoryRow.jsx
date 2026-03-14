@@ -12,6 +12,10 @@ function CategoryRow() {
     { name: "Accessories", icon: "⌚" }
   ];
 
+  const handleClick = (category) => {
+    navigate(`/home?category=${category}`);
+  };
+
   return (
     <div className="flex justify-center gap-10 py-6 bg-slate-950">
 
@@ -19,7 +23,7 @@ function CategoryRow() {
 
         <div
           key={cat.name}
-          onClick={() => navigate(`/category/${cat.name}`)}
+          onClick={() => handleClick(cat.name)}
           className="flex flex-col items-center cursor-pointer hover:scale-110 transition"
         >
 

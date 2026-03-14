@@ -1,40 +1,63 @@
 import Navbar from "../components/Navbar";
 import CategoryRow from "../components/CategoryRow";
-import HeroBanner from "../components/HeroBanner";
 import FlashBanner from "../components/FlashBanner";
 import ProductCard from "../components/ProductCard";
 
 import products from "../data/products";
 
+import { useLocation } from "react-router-dom";
+
 function HomePage() {
+
+  const location = useLocation();
+
+  const params = new URLSearchParams(location.search);
+
+  const category = params.get("category");
+  const search = params.get("search");
+
+  let filteredProducts = products;
+
+  // Category filtering
+  if (category) {
+    filteredProducts = filteredProducts.filter(
+      (p) => p.category.toLowerCase() === category.toLowerCase()
+    );
+  }
+
+  // Search filtering
+  if (search) {
+    filteredProducts = filteredProducts.filter(
+      (p) => p.name.toLowerCase().includes(search.toLowerCase())
+    );
+  }
+
   return (
     <div className="min-h-screen">
 
-      {/* Top Navigation */}
+      {/* Navbar */}
       <Navbar />
 
-      {/* Category Navigation */}
+      {/* Categories */}
       <CategoryRow />
 
       <div className="p-10">
 
-        {/* Hero Banner */}
-        <HeroBanner />
+        {/* Flash Sale Banner */}
+        <FlashBanner />
 
-        {/* Flash Drop Section */}
-        <div className="mt-10">
-          <FlashBanner />
-        </div>
-
-        {/* Product Section */}
-        <h2 className="text-2xl mt-12 mb-6 text-yellow-400">
+        <h2 className="text-2xl mt-10 mb-6 text-yellow-400">
           Trending Products
         </h2>
 
+        {/* Product Grid */}
         <div className="grid grid-cols-4 gap-6">
 
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {filteredProducts.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+            />
           ))}
 
         </div>

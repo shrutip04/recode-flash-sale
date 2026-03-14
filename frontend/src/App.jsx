@@ -8,6 +8,8 @@ import QueuePage from "./pages/QueuePage";
 import CheckoutPage from "./pages/CheckoutPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import HomePage from "./pages/HomePage";
+import ProductPage from "./pages/ProductPage";
+
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
         <Route path="/admin" element={<AdminDashboard />} />
 
         <Route path="/home" element={<HomePage />} />
+
+        <Route path="/product/:id" element={<ProductPage />} />
 
       </Routes>
 
