@@ -11,10 +11,10 @@ function ProductCard({ product }) {
     >
 
       <img
-        src={product.image}
-        alt={product.name}
-        className="rounded mb-3"
-      />
+      src={product.image || "https://via.placeholder.com/300"}
+      alt={product.name}
+      className="rounded mb-3"
+    />
 
       <h3 className="text-lg font-semibold">
         {product.name}
