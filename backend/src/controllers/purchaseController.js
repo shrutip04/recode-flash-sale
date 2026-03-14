@@ -1,6 +1,8 @@
 const { attemptPurchase } = require("../services/inventoryService");
+const { createOrder } = require("../models/orderModel");
 
 function purchaseProduct(req, res) {
+
   const { productId } = req.body;
 
   if (!productId) {
@@ -16,7 +18,15 @@ function purchaseProduct(req, res) {
     return res.status(400).json(result);
   }
 
-  return res.json(result);
+  const order = createOrder(productId);
+
+  return res.json({
+    success: true,
+    message: "Purchase successful",
+    orderId: order.id,
+    remainingStock: result.remainingStock
+  });
+
 }
 
 module.exports = {
