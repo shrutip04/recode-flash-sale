@@ -10,23 +10,23 @@ const products = [
     id: 2,
     name: "Gaming Headset",
     price: 120,
-    image: "https://images.unsplash.com/photo-1585386959984-a415522316e9",
+    image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb",
     category: "electronics"
   },
   {
     id: 3,
     name: "Smart Watch",
     price: 180,
-    image: "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b",
+    image: "https://images.unsplash.com/photo-1517430816045-df4b7de11d1d",
     category: "electronics"
   },
   {
     id: 4,
     name: "Streetwear Hoodie",
     price: 60,
-    image: "https://images.unsplash.com/photo-1520975922323-1c3e9d9c22f0",
+    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
     category: "fashion"
   }
 ]
 
-export default products
+export default products;

@@ -1,36 +1,48 @@
-import products from "../data/products"
+import Navbar from "../components/Navbar";
+import CategoryRow from "../components/CategoryRow";
+import HeroBanner from "../components/HeroBanner";
+import FlashBanner from "../components/FlashBanner";
+import ProductCard from "../components/ProductCard";
+
+import products from "../data/products";
 
 function HomePage() {
-
   return (
+    <div className="min-h-screen">
 
-    <div className="p-10">
+      {/* Top Navigation */}
+      <Navbar />
 
-      <h1 className="text-4xl text-yellow-400 mb-8">
-        Marketplace
-      </h1>
+      {/* Category Navigation */}
+      <CategoryRow />
 
-      <div className="grid grid-cols-4 gap-6">
+      <div className="p-10">
 
-        {products.map((product) => (
+        {/* Hero Banner */}
+        <HeroBanner />
 
-          <div key={product.id} className="bg-slate-900 p-4 rounded-xl">
+        {/* Flash Drop Section */}
+        <div className="mt-10">
+          <FlashBanner />
+        </div>
 
-            <img src={product.image} className="rounded mb-3"/>
+        {/* Product Section */}
+        <h2 className="text-2xl mt-12 mb-6 text-yellow-400">
+          Trending Products
+        </h2>
 
-            <h3 className="text-lg">{product.name}</h3>
+        <div className="grid grid-cols-4 gap-6">
 
-            <p className="text-gray-400">${product.price}</p>
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
 
-          </div>
-
-        ))}
+        </div>
 
       </div>
 
     </div>
-
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;
