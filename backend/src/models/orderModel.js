@@ -1,7 +1,6 @@
 let orders = [];
 
 function createOrder(productId) {
-
   const newOrder = {
     id: "ORD-" + Date.now(),
     productId: productId,
