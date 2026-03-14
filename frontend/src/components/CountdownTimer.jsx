@@ -1,24 +1,29 @@
 import { useEffect, useState } from "react";
 
 function CountdownTimer({ onComplete }) {
+
   const targetTime = new Date().getTime() + 5 * 60 * 1000;
 
   const [timeLeft, setTimeLeft] = useState(targetTime - new Date().getTime());
 
   useEffect(() => {
+
     const interval = setInterval(() => {
+
       const remaining = targetTime - new Date().getTime();
 
       if (remaining <= 0) {
         clearInterval(interval);
         setTimeLeft(0);
-        onComplete(true);
+        if (onComplete) onComplete(true);
       } else {
         setTimeLeft(remaining);
       }
+
     }, 1000);
 
     return () => clearInterval(interval);
+
   }, []);
 
   const minutes = Math.floor((timeLeft / 1000 / 60) % 60);
