@@ -7,6 +7,7 @@ import FlashSale from "./pages/FlashSale";
 import QueuePage from "./pages/QueuePage";
 import CheckoutPage from "./pages/CheckoutPage";
 import AdminDashboard from "./pages/AdminDashboard";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
         <Route path="/checkout" element={<CheckoutPage />} />
 
         <Route path="/admin" element={<AdminDashboard />} />
+
+        <Route path="/home" element={<HomePage />} />
 
       </Routes>
 

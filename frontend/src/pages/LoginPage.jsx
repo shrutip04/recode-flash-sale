@@ -5,7 +5,7 @@ function LoginPage() {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    navigate("/drops");
+    navigate("/home");
   };
 
   return (
