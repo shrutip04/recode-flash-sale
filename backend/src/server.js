@@ -10,6 +10,8 @@ const purchaseRoutes = require("./routes/purchaseRoutes");
 
 const productRoutes = require("./routes/productRoutes");
 
+const orderRoutes = require("./routes/orderRoutes");
+
 dotenv.config();
 
 const app = express();
@@ -21,6 +23,9 @@ app.use(morgan("dev"));
 app.use("/api/purchase", purchaseRoutes);
 
 app.use("/api/products", productRoutes);
+
+app.use("/api/orders", orderRoutes);
+
 
 app.get("/", (req, res) => {
   res.json({
