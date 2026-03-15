@@ -1,53 +1,48 @@
-import CategoryCard from "./CategoryCard";
+function CategoryRow() {
 
-function CategoryRow(){
+  const categories = [
+    { name: "Sneakers", icon: "👟", desc: "Limited edition kicks" },
+    { name: "Electronics", icon: "⚡", desc: "Cutting-edge tech drops" },
+    { name: "Collectibles", icon: "🎯", desc: "Rare finds & exclusives" },
+    { name: "Apparel", icon: "🧥", desc: "Designer streetwear" }
+  ];
 
-const categories = [
+  return (
 
-{
-title:"Sneakers",
-icon:"👟",
-description:"Limited edition kicks"
-},
+    <div className="max-w-7xl mx-auto px-10 py-16">
 
-{
-title:"Electronics",
-icon:"⚡",
-description:"Cutting edge tech"
-},
+      <h2 className="text-3xl text-center mb-10">
+        CATEGORIES
+      </h2>
 
-{
-title:"Collectibles",
-icon:"🎯",
-description:"Rare finds"
-},
+      <div className="grid grid-cols-4 gap-6">
 
-{
-title:"Apparel",
-icon:"🧥",
-description:"Designer streetwear"
-}
+        {categories.map((cat, i) => (
 
-]
+          <div
+            key={i}
+            className="bg-slate-800 p-6 rounded-xl hover:scale-105 transition cursor-pointer"
+          >
 
-return(
+            <div className="text-3xl mb-4">{cat.icon}</div>
 
-<div className="flex justify-center gap-6 py-12">
+            <h3 className="text-lg font-semibold">
+              {cat.name}
+            </h3>
 
-{categories.map((c,i)=>(
+            <p className="text-gray-400 text-sm mt-2">
+              {cat.desc}
+            </p>
 
-<CategoryCard
-key={i}
-title={c.title}
-icon={c.icon}
-description={c.description}
-/>
+          </div>
 
-))}
+        ))}
 
-</div>
+      </div>
 
-)
+    </div>
+
+  );
 
 }
 

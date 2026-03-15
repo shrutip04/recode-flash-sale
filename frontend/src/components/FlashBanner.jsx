@@ -1,18 +1,18 @@
-function FlashBanner(){
+function FlashBanner() {
 
-return(
+  return (
+    <div className="w-full bg-yellow-500 text-black py-2 overflow-hidden">
 
-<div className="text-center py-16">
+      <div className="whitespace-nowrap animate-[scroll_15s_linear_infinite] font-semibold">
 
-<h2 className="text-3xl mb-8">
+        ⚡ FLASH SALE ACTIVE — STOCK DEPLETING RAPIDLY ⚡ 
+        ⚡ FLASH SALE ACTIVE — STOCK DEPLETING RAPIDLY ⚡ 
+        ⚡ FLASH SALE ACTIVE — STOCK DEPLETING RAPIDLY ⚡
 
-TONIGHT'S <span className="neon">DROPS</span>
+      </div>
 
-</h2>
-
-</div>
-
-)
+    </div>
+  );
 
 }
 

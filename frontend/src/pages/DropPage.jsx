@@ -1,48 +1,42 @@
-import Navbar from "../components/Navbar"
-import ProductCard from "../components/ProductCard"
-import QueueStatus from "../components/QueueStatus"
+import Navbar from "../components/Navbar";
+import ProductGrid from "../components/ProductGrid";
+import QueueStatus from "../components/QueueStatus";
+import LiveQueueFeed from "../components/LiveQueueFeed";
 
-function DropPage(){
+function DropPage() {
 
-const products=[
-{
-name:"Phantom X1",
-price:349,
-description:"Ultra limited sneaker",
-image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff"
-},
-{
-name:"Nova Headset Pro",
-price:199,
-description:"Spatial audio headset",
-image:"https://images.unsplash.com/photo-1518441902110-27c7d3b8b1b1"
-}
-]
+  return (
 
-return(
+    <div>
 
-<div>
+      <Navbar />
 
-<Navbar/>
+      <div className="max-w-7xl mx-auto px-10 py-16 grid grid-cols-3 gap-10">
 
-<div className="flex gap-10 p-10">
+        <div className="col-span-2">
 
-<div className="flex gap-6">
+          <h1 className="text-4xl mb-10">
+            PRODUCT <span className="neon">DROP</span>
+          </h1>
 
-{products.map(p=>(
-<ProductCard product={p}/>
-))}
+          <ProductGrid />
 
-</div>
+        </div>
 
-<QueueStatus/>
+        <div className="space-y-6">
 
-</div>
+          <QueueStatus />
 
-</div>
+          <LiveQueueFeed />
 
-)
+        </div>
+
+      </div>
+
+    </div>
+
+  );
 
 }
 
-export default DropPage
+export default DropPage;

@@ -62,4 +62,19 @@ ADD TO CART
 
 }
 
+const handleBuy = async () => {
+
+await fetch("http://localhost:5000/api/purchase",{
+
+method:"POST",
+headers:{ "Content-Type":"application/json" },
+
+body:JSON.stringify({
+productId: product.id
+})
+
+})
+
+}
+
 export default ProductCard

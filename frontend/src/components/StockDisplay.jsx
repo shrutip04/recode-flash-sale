@@ -1,25 +1,30 @@
 import { useEffect, useState } from "react";
 import socket from "../sockets/socketClient";
 
-const StockDisplay = ({ initialStock }) => {
-  const [stock, setStock] = useState(initialStock);
+function StockDisplay(){
 
-  useEffect(() => {
-    socket.on("stockUpdate", (data) => {
-      console.log("Stock update received:", data);
-      setStock(data.newStock);
-    });
+const [stock,setStock] = useState(0)
 
-    return () => {
-      socket.off("stockUpdate");
-    };
-  }, []);
+useEffect(()=>{
 
-  return (
-    <div>
-      <h2>Stock Remaining: {stock}</h2>
-    </div>
-  );
-};
+socket.on("stockUpdate",(data)=>{
+setStock(data.newStock)
+})
+
+return ()=> socket.off("stockUpdate")
+
+},[])
+
+return(
+
+<div>
+
+Stock left: {stock}
+
+</div>
+
+)
+
+}
 
 export default StockDisplay;

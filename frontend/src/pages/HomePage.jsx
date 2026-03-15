@@ -1,25 +1,25 @@
 import Navbar from "../components/Navbar";
 import HeroBanner from "../components/HeroBanner";
 import CategoryRow from "../components/CategoryRow";
-import FlashBanner from "../components/FlashBanner";
+import ProductGrid from "../components/ProductGrid";
 
-function HomePage(){
+function HomePage() {
 
-  return(
+  return (
 
     <div>
 
-      <Navbar/>
+      <Navbar />
 
-      <HeroBanner/>
+      <HeroBanner />
 
-      <CategoryRow/>
+      <CategoryRow />
 
-      <FlashBanner/>
+      <ProductGrid />
 
     </div>
 
-  )
+  );
 
 }
 
