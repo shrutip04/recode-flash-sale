@@ -1,43 +1,75 @@
-import { useEffect, useState } from "react"
 import ProductCard from "./ProductCard"
 
-function ProductGrid() {
+function ProductGrid(){
 
-  const [products, setProducts] = useState([])
+const products = [
 
-  useEffect(() => {
+{
+id:1,
+name:"Phantom X1",
+price:349,
+description:"Ultra limited sneaker",
+image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff",
+stock:20,
+totalStock:50
+},
 
-    fetch("http://localhost:5000/api/products")
-      .then(res => res.json())
-      .then(data => setProducts(data))
-      .catch(err => console.error(err))
+{
+id:2,
+name:"Nova Headset Pro",
+price:199,
+description:"Gaming headset",
+image:"https://images.unsplash.com/photo-1518444065439-e933c06ce9cd",
+stock:15,
+totalStock:40
+},
 
-  }, [])
+{
+id:3,
+name:"Stealth Hoodie V2",
+price:129,
+description:"Limited drop hoodie",
+image:"https://images.unsplash.com/photo-1523381210434-271e8be1f52b",
+stock:30,
+totalStock:60
+},
 
-  return (
+{
+id:4,
+name:"Cyber Chrono",
+price:499,
+description:"Collector watch",
+image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30",
+stock:12,
+totalStock:30
+}
 
-    <section className="max-w-[1200px] mx-auto px-6 pb-20">
+]
 
-      <h2 className="text-3xl text-center mb-10 text-white">
-        TONIGHT'S <span className="text-cyan-400">DROPS</span>
-      </h2>
+return(
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+<div className="max-w-7xl mx-auto px-10 pb-20">
 
-        {products.map(product => (
+<h2 className="text-3xl mb-8 text-center">
+TONIGHT'S <span className="text-cyan-400">DROPS</span>
+</h2>
 
-          <ProductCard
-            key={product.id}
-            product={product}
-          />
+<div className="grid grid-cols-4 gap-6">
 
-        ))}
+{products.map(product => (
 
-      </div>
+<ProductCard
+key={product.id}
+product={product}
+/>
 
-    </section>
+))}
 
-  )
+</div>
+
+</div>
+
+)
 
 }
 

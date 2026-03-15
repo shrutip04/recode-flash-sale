@@ -1,40 +1,53 @@
-function HeroBanner() {
+import { useNavigate } from "react-router-dom"
 
-  return (
+function HeroBanner(){
 
-    <section className="relative text-center pt-28 pb-32 px-6">
+const navigate = useNavigate()
 
-      {/* subtle background glow */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,rgba(0,255,255,0.08),transparent_60%)]"></div>
+return(
 
-      <h1 className="text-5xl md:text-7xl font-bold tracking-widest text-white">
-        THE MIDNIGHT
-      </h1>
+<section className="text-center pt-28 pb-32">
 
-      <h1 className="text-5xl md:text-7xl font-bold mb-6 text-cyan-400 drop-shadow-[0_0_12px_rgba(0,255,255,0.6)]">
-        PRODUCT DROP
-      </h1>
+<h1 className="text-7xl font-bold tracking-widest">
+THE MIDNIGHT
+</h1>
 
-      <p className="text-gray-400 max-w-xl mx-auto mb-10 text-sm md:text-base leading-relaxed">
-        Thousands arrive. Only a few leave with the prize.
-        When the clock hits zero, the gate opens.
-      </p>
+<h1 className="text-7xl font-bold text-cyan-400 mb-6">
+PRODUCT DROP
+</h1>
 
-      <div className="flex justify-center gap-6 flex-wrap">
+<p className="text-gray-400 max-w-xl mx-auto mb-10">
 
-        <button className="bg-cyan-500 hover:bg-cyan-400 text-black font-semibold px-6 py-3 rounded-lg transition-all duration-200 shadow-[0_0_12px_rgba(0,255,255,0.35)]">
-          ENTER THE DROP →
-        </button>
+Thousands arrive. Only a few leave with the prize.
+When the clock hits zero, the gate opens.
 
-        <button className="border border-gray-600 hover:border-cyan-400 text-white px-6 py-3 rounded-lg transition-all duration-200">
-          VIEW PRODUCTS
-        </button>
+</p>
 
-      </div>
+<div className="flex justify-center gap-6">
 
-    </section>
+<button
+onClick={()=>navigate("/drop")}
+className="bg-cyan-500 text-black px-6 py-3 rounded-lg font-semibold"
+>
 
-  )
+ENTER THE DROP →
+
+</button>
+
+<button
+onClick={()=>navigate("/flash")}
+className="border border-cyan-400 px-6 py-3 rounded-lg"
+>
+
+VIEW PRODUCTS
+
+</button>
+
+</div>
+
+</section>
+
+)
 
 }
 

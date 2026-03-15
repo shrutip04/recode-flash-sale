@@ -3,6 +3,7 @@ import ProductGrid from "../components/ProductGrid"
 import QueueStatus from "../components/QueueStatus"
 import LiveQueueFeed from "../components/LiveQueueFeed"
 import LivePurchaseFeed from "../components/LivePurchaseFeed"
+import CountdownTimer from "../components/CountdownTimer"
 
 function DropPage() {
 

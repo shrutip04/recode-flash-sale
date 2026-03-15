@@ -1,80 +1,78 @@
+import { useState } from "react"
 import { useCart } from "../context/CartContext"
 
-function ProductCard({ product }) {
+function ProductCard({product}){
 
-  const { addToCart } = useCart()
+const { addToCart } = useCart()
 
-  const stock = product.stock ?? 10
-  const totalStock = product.totalStock ?? 50
+const [stock,setStock] = useState(product.stock)
 
-  const stockPercent = (stock / totalStock) * 100
+const stockPercent = (stock/product.totalStock)*100
 
-  return (
+return(
 
-    <div className="w-[280px] bg-[#0b0f14] border border-[#1f2937] rounded-xl overflow-hidden hover:border-cyan-400/60 transition-all duration-300">
+<div className="bg-[#0b0f14] border border-[#1f2937] rounded-xl overflow-hidden w-[280px]">
 
-      {/* Product Image */}
-      <img
-        src={product.image}
-        alt={product.name}
-        className="h-44 w-full object-cover"
-      />
+<img
+src={product.image}
+className="h-44 w-full object-cover"
+/>
 
-      <div className="p-4">
+<div className="p-4">
 
-        {/* Product Name */}
-        <h3 className="font-semibold text-white mb-1">
-          {product.name}
-        </h3>
+<h3 className="font-semibold mb-1">
+{product.name}
+</h3>
 
-        {/* Description */}
-        <p className="text-gray-400 text-sm mb-3">
-          {product.description}
-        </p>
-
-        {/* Price + Badge */}
-        <div className="flex justify-between items-center mb-2">
-
-          <p className="text-lg font-bold text-white">
-            ${product.price}
-          </p>
-
-          <span className="text-xs bg-cyan-400 text-black px-2 py-1 rounded">
-            FLASH SALE
-          </span>
-
-        </div>
-
-        {/* Stock text */}
-<p className="text-xs text-gray-400 mb-1">
-  {stock}/{totalStock} remaining
+<p className="text-gray-400 text-sm mb-3">
+{product.description}
 </p>
 
-{/* Progress Bar */}
-<div className="h-2 bg-slate-700 rounded mb-4 overflow-hidden">
+<div className="flex justify-between items-center mb-2">
 
-  <div
-    className={`h-2 rounded transition-all duration-700 ${
-      stockPercent < 30 ? "bg-red-400" : stockPercent < 60 ? "bg-yellow-400" : "bg-green-400"
-    }`}
-    style={{ width: `${stockPercent}%` }}
-  />
+<p className="text-lg font-bold">
+${product.price}
+</p>
+
+<span className="text-xs bg-cyan-500 text-black px-2 py-1 rounded">
+FLASH SALE
+</span>
 
 </div>
 
-        {/* Add to Cart */}
-        <button
-          onClick={() => addToCart(product)}
-          className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-semibold py-2 rounded-lg transition"
-        >
-          ADD TO CART
-        </button>
+<p className="text-xs text-gray-400 mb-1">
+{stock}/{product.totalStock} remaining
+</p>
 
-      </div>
+<div className="h-2 bg-slate-700 rounded mb-3">
 
-    </div>
+<div
+className="h-2 bg-green-400 rounded transition-all"
+style={{width:`${stockPercent}%`}}
+/>
 
-  )
+</div>
+
+<button
+onClick={()=>{
+
+addToCart(product)
+
+setStock(prev=> prev>0 ? prev-1 : 0)
+
+}}
+className="bg-cyan-500 w-full py-2 rounded text-black font-semibold"
+>
+
+ADD TO CART
+
+</button>
+
+</div>
+
+</div>
+
+)
 
 }
 

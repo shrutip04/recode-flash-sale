@@ -1,35 +1,46 @@
-function LoginPage() {
+import { useNavigate } from "react-router-dom"
 
-  return (
+function LoginPage(){
 
-    <div className="flex justify-center items-center min-h-screen bg-[#0b0f14]">
+const navigate = useNavigate()
 
-      <div className="bg-slate-800 p-10 rounded-xl w-96">
+const handleLogin = ()=>{
+navigate("/")
+}
 
-        <h1 className="text-2xl mb-6 text-center text-cyan-400">
-          SIGN IN
-        </h1>
+return(
 
-        <input
-          className="w-full p-3 mb-4 bg-slate-700 rounded"
-          placeholder="Email"
-        />
+<div className="flex justify-center items-center min-h-screen bg-[#0b0f14]">
 
-        <input
-          type="password"
-          className="w-full p-3 mb-6 bg-slate-700 rounded"
-          placeholder="Password"
-        />
+<div className="bg-slate-800 p-10 rounded-xl w-96">
 
-        <button className="w-full bg-cyan-500 py-2 rounded">
-          ENTER
-        </button>
+<h1 className="text-2xl mb-6 text-center text-cyan-400">
+SIGN IN
+</h1>
 
-      </div>
+<input
+className="w-full p-3 mb-4 bg-slate-700 rounded"
+placeholder="Email"
+/>
 
-    </div>
+<input
+type="password"
+className="w-full p-3 mb-6 bg-slate-700 rounded"
+placeholder="Password"
+/>
 
-  )
+<button
+onClick={handleLogin}
+className="w-full bg-cyan-500 py-2 rounded"
+>
+ENTER
+</button>
+
+</div>
+
+</div>
+
+)
 
 }
 
