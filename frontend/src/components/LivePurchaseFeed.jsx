@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react"
+import { useState, useEffect } from "react"
 
 function LivePurchaseFeed(){
 
@@ -17,7 +17,10 @@ const products = [
 "Cyber Chrono"
 ]
 
-const event = `${users[Math.floor(Math.random()*4)]} bought ${products[Math.floor(Math.random()*4)]}`
+const event =
+`${users[Math.floor(Math.random()*users.length)]}
+ bought
+ ${products[Math.floor(Math.random()*products.length)]}`
 
 setFeed(prev => [event,...prev].slice(0,5))
 
@@ -29,14 +32,14 @@ return ()=> clearInterval(interval)
 
 return(
 
-<div className="fixed bottom-6 left-6 w-72 bg-slate-800 p-4 rounded-xl">
+<div className="fixed bottom-6 left-6 w-72 bg-slate-800 p-4 rounded-xl shadow-lg">
 
 <p className="text-sm text-cyan-400 mb-2">
 Live Purchases
 </p>
 
 {feed.map((f,i)=>(
-<div key={i} className="text-xs text-gray-300">
+<div key={i} className="text-xs text-gray-300 mb-1">
 {f}
 </div>
 ))}

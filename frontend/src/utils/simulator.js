@@ -1,4 +1,4 @@
-export function simulateBuyers(productId, buyers = 100) {
+export function simulateBuyers(productId, buyers, setTrafficCount) {
 
   const API = "https://recode-flash-sale.onrender.com";
 
@@ -16,11 +16,11 @@ export function simulateBuyers(productId, buyers = 100) {
         })
       })
       .then(res => res.json())
-      .then(data => {
-        console.log("Buyer", i, data);
+      .then(() => {
+        setTrafficCount(prev => prev + 1);
       })
-      .catch(err => {
-        console.error("Buyer failed", err);
+      .catch(() => {
+        console.log("buyer failed");
       });
 
     }, Math.random() * 2000);
