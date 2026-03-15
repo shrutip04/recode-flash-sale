@@ -16,6 +16,8 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const { initSocket } = require("./sockets/socketServer");
 
+const simulatorRoutes = require("./routes/simulatorRoutes");
+
 dotenv.config();
 
 const app = express();
@@ -31,6 +33,8 @@ app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 
 app.use("/api/dashboard", dashboardRoutes);
+
+app.use("/api/simulate", simulatorRoutes);
 
 
 app.get("/", (req, res) => {
