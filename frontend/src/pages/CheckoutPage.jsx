@@ -9,39 +9,27 @@ const { cartItems, clearCart } = useCart()
 
 const navigate = useNavigate()
 
-const [orderPlaced,setOrderPlaced] = useState(false)
-const [orderId,setOrderId] = useState(null)
+const [processing,setProcessing] = useState(false)
+const [orderSuccess,setOrderSuccess] = useState(false)
 
 const total = cartItems.reduce(
 (sum,item)=> sum + item.price,
 0
 )
 
-const handlePlaceOrder = async ()=>{
+const handlePlaceOrder = () => {
 
-try{
+setProcessing(true)
 
-const res = await fetch("http://localhost:5000/api/purchase",{
-method:"POST",
-headers:{ "Content-Type":"application/json" },
-body:JSON.stringify({
-productId: cartItems[0]?.id
-})
-})
+setTimeout(()=>{
 
-const data = await res.json()
+setProcessing(false)
 
-setOrderId(data.orderId || "ORD-" + Math.random().toString(36).substring(2,9))
-
-setOrderPlaced(true)
+setOrderSuccess(true)
 
 clearCart()
 
-}catch(err){
-
-console.error(err)
-
-}
+},3000)
 
 }
 
@@ -57,9 +45,31 @@ return(
 CHECK<span className="text-cyan-400">OUT</span>
 </h1>
 
+{/* PAYMENT PROCESSING MODAL */}
+
+{processing && (
+
+<div className="fixed inset-0 flex items-center justify-center bg-black/60">
+
+<div className="bg-[#0b0f14] border border-cyan-400 p-8 rounded-xl text-center">
+
+<p className="text-xl text-cyan-400 mb-4">
+Processing Payment...
+</p>
+
+<p className="text-gray-400">
+Please wait while we secure your drop.
+</p>
+
+</div>
+
+</div>
+
+)}
+
 {/* ORDER SUCCESS */}
 
-{orderPlaced && (
+{orderSuccess && (
 
 <div className="border border-green-600 bg-green-900/20 rounded-xl p-6 mb-12">
 
@@ -68,8 +78,15 @@ CHECK<span className="text-cyan-400">OUT</span>
 </p>
 
 <p className="text-gray-400 mt-1">
-Order ID: {orderId}
+Your item will be shipped soon.
 </p>
+
+<button
+onClick={()=>navigate("/")}
+className="mt-4 bg-cyan-500 text-black px-6 py-2 rounded"
+>
+Back to Home
+</button>
 
 </div>
 
@@ -77,7 +94,7 @@ Order ID: {orderId}
 
 {/* EMPTY CART */}
 
-{cartItems.length === 0 && !orderPlaced && (
+{cartItems.length === 0 && !orderSuccess && (
 
 <div className="flex flex-col items-center pt-20">
 
@@ -102,11 +119,9 @@ BROWSE DROPS
 
 {/* CART ITEMS */}
 
-{cartItems.length > 0 && (
+{cartItems.length > 0 && !orderSuccess && (
 
 <div className="grid grid-cols-3 gap-8">
-
-{/* CART ITEM */}
 
 <div className="col-span-2 space-y-4">
 
@@ -138,20 +153,11 @@ ${item.price}
 
 </div>
 
-<button
-onClick={clearCart}
-className="text-gray-400 hover:text-red-400"
->
-🗑
-</button>
-
 </div>
 
 ))}
 
 </div>
-
-{/* ORDER SUMMARY */}
 
 <div className="bg-slate-800 p-6 rounded-xl h-fit">
 
@@ -197,7 +203,7 @@ PLACE ORDER
 
 <button
 onClick={clearCart}
-className="w-full text-gray-400 mt-3"
+className="w-full text-red-400 mt-3"
 >
 Clear Cart
 </button>
