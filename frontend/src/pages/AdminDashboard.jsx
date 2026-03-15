@@ -10,7 +10,7 @@ function AdminDashboard() {
 
   const simulateTraffic = async () => {
 
-    await fetch("http://localhost:5000/api/simulate", {
+    await fetch("https://recode-flash-sale.onrender.com", {
       method: "POST"
     })
 

@@ -1,26 +1,30 @@
-export function simulateBuyers(setProducts){
+export function simulateBuyers(productId, buyers = 100) {
 
-setInterval(()=>{
+  const API = "https://recode-flash-sale.onrender.com";
 
-setProducts(prev =>
+  for (let i = 0; i < buyers; i++) {
 
-prev.map(p=>{
+    setTimeout(() => {
 
-if(p.stock > 0 && Math.random() > 0.7){
+      fetch(`${API}/purchase`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          productId: productId
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log("Buyer", i, data);
+      })
+      .catch(err => {
+        console.error("Buyer failed", err);
+      });
 
-return {
-...p,
-stock:p.stock-1
-}
+    }, Math.random() * 2000);
 
-}
-
-return p
-
-})
-
-)
-
-},2000)
+  }
 
 }
