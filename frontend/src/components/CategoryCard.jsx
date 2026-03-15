@@ -1,25 +1,24 @@
-function CategoryCard({title, icon, description}){
+function CategoryCard({ title, icon, description }) {
+  return (
+    <div className="group relative w-[260px] rounded-xl border border-[#1f2937] bg-[#0b0f14] p-6 text-center transition-all duration-300 hover:border-cyan-400/60 hover:shadow-[0_0_20px_rgba(0,255,255,0.15)]">
 
-return(
+      {/* Icon */}
+      <div className="text-4xl mb-4 text-cyan-400 transition-transform duration-300 group-hover:scale-110">
+        {icon}
+      </div>
 
-<div className="card p-6 text-center w-[260px]">
+      {/* Title */}
+      <h3 className="text-lg font-semibold text-white mb-2">
+        {title}
+      </h3>
 
-<div className="text-3xl mb-3">
-{icon}
-</div>
+      {/* Description */}
+      <p className="text-gray-400 text-sm leading-relaxed">
+        {description}
+      </p>
 
-<h3 className="font-semibold mb-2">
-{title}
-</h3>
-
-<p className="text-gray-400 text-sm">
-{description}
-</p>
-
-</div>
-
-)
-
+    </div>
+  )
 }
 
 export default CategoryCard

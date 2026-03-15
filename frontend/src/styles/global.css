@@ -91,3 +91,12 @@ body {
 .primary-btn:hover {
   transform: scale(1.05);
 }
+
+@keyframes flashScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

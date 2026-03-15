@@ -1,79 +1,91 @@
-function ProductCard({product}){
+function ProductCard({ product }) {
 
-return(
+  const stockPercent = (product.stock / product.totalStock) * 100
 
-<div className="card overflow-hidden w-[280px]">
+  const handleBuy = async () => {
 
-<img
-src={product.image}
-className="h-44 w-full object-cover"
-/>
+    try {
 
-<div className="p-4">
+      await fetch("http://localhost:5000/api/purchase", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          productId: product.id
+        })
+      })
 
-<h3 className="font-semibold mb-1">
+      alert("Added to cart")
 
-{product.name}
+    } catch (err) {
+      console.error(err)
+      alert("Purchase failed")
+    }
 
-</h3>
+  }
 
-<p className="text-gray-400 text-sm mb-3">
+  return (
 
-{product.description}
+    <div className="w-[280px] bg-[#0b0f14] border border-[#1f2937] rounded-xl overflow-hidden hover:border-cyan-400/60 transition-all">
 
-</p>
+      {/* Product Image */}
+      <img
+        src={product.image}
+        className="h-44 w-full object-cover"
+      />
 
-<div className="flex justify-between items-center mb-2">
+      <div className="p-4">
 
-<p className="text-lg font-bold">
+        {/* Name */}
+        <h3 className="font-semibold text-white mb-1">
+          {product.name}
+        </h3>
 
-${product.price}
+        {/* Description */}
+        <p className="text-gray-400 text-sm mb-3">
+          {product.description}
+        </p>
 
-</p>
+        {/* Price + Tag */}
+        <div className="flex justify-between items-center mb-2">
 
-<span className="text-xs bg-cyan-500 text-black px-2 py-1 rounded">
+          <p className="text-lg font-bold text-white">
+            ${product.price}
+          </p>
 
-FLASH SALE
+          <span className="text-xs bg-cyan-400 text-black px-2 py-1 rounded">
+            FLASH SALE
+          </span>
 
-</span>
+        </div>
 
-</div>
+        {/* Stock text */}
+        <p className="text-xs text-gray-400 mb-1">
+          {product.stock} / {product.totalStock} remaining
+        </p>
 
-<div className="h-2 bg-slate-700 rounded mb-3">
+        {/* Progress bar */}
+        <div className="h-2 bg-slate-700 rounded mb-4">
 
-<div
-className="h-2 bg-green-400 rounded"
-style={{width:"70%"}}
-/>
+          <div
+            className="h-2 bg-green-400 rounded transition-all"
+            style={{ width: `${stockPercent}%` }}
+          />
 
-</div>
+        </div>
 
-<button className="primary-btn w-full">
+        {/* Button */}
+        <button
+          onClick={handleBuy}
+          className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-semibold py-2 rounded-lg transition"
+        >
+          ADD TO CART
+        </button>
 
-ADD TO CART
+      </div>
 
-</button>
+    </div>
 
-</div>
-
-</div>
-
-)
-
-}
-
-const handleBuy = async () => {
-
-await fetch("http://localhost:5000/api/purchase",{
-
-method:"POST",
-headers:{ "Content-Type":"application/json" },
-
-body:JSON.stringify({
-productId: product.id
-})
-
-})
+  )
 
 }
 

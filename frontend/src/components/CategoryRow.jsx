@@ -1,49 +1,53 @@
+import CategoryCard from "./CategoryCard"
+import { FaShoePrints, FaBolt, FaBullseye, FaTshirt } from "react-icons/fa"
+
 function CategoryRow() {
 
   const categories = [
-    { name: "Sneakers", icon: "👟", desc: "Limited edition kicks" },
-    { name: "Electronics", icon: "⚡", desc: "Cutting-edge tech drops" },
-    { name: "Collectibles", icon: "🎯", desc: "Rare finds & exclusives" },
-    { name: "Apparel", icon: "🧥", desc: "Designer streetwear" }
-  ];
+    {
+      title: "Sneakers",
+      icon: <FaShoePrints />,
+      description: "Limited edition kicks"
+    },
+    {
+      title: "Electronics",
+      icon: <FaBolt />,
+      description: "Cutting-edge tech drops"
+    },
+    {
+      title: "Collectibles",
+      icon: <FaBullseye />,
+      description: "Rare finds & exclusives"
+    },
+    {
+      title: "Apparel",
+      icon: <FaTshirt />,
+      description: "Designer streetwear"
+    }
+  ]
 
   return (
+    <section className="max-w-[1200px] mx-auto px-6 py-16">
 
-    <div className="max-w-7xl mx-auto px-10 py-16">
-
-      <h2 className="text-3xl text-center mb-10">
+      {/* Section Title */}
+      <h2 className="text-center text-2xl font-semibold tracking-widest text-white mb-10">
         CATEGORIES
       </h2>
 
-      <div className="grid grid-cols-4 gap-6">
-
-        {categories.map((cat, i) => (
-
-          <div
-            key={i}
-            className="bg-slate-800 p-6 rounded-xl hover:scale-105 transition cursor-pointer"
-          >
-
-            <div className="text-3xl mb-4">{cat.icon}</div>
-
-            <h3 className="text-lg font-semibold">
-              {cat.name}
-            </h3>
-
-            <p className="text-gray-400 text-sm mt-2">
-              {cat.desc}
-            </p>
-
-          </div>
-
+      {/* Category Cards */}
+      <div className="flex flex-wrap justify-center gap-8">
+        {categories.map((category, index) => (
+          <CategoryCard
+            key={index}
+            title={category.title}
+            icon={category.icon}
+            description={category.description}
+          />
         ))}
-
       </div>
 
-    </div>
-
-  );
-
+    </section>
+  )
 }
 
-export default CategoryRow;
+export default CategoryRow
