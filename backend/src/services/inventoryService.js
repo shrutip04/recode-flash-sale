@@ -1,4 +1,6 @@
+const { broadcastStockUpdate } = require("../sockets/socketServer");
 const { products } = require("../models/productModel");
+
 
 function attemptPurchase(productId) {
 
@@ -20,6 +22,8 @@ function attemptPurchase(productId) {
 
   product.stock -= 1;
 
+  broadcastStockUpdate(productId, product.stock);
+
   return {
     success: true,
     message: "Purchase successful",
@@ -30,3 +34,5 @@ function attemptPurchase(productId) {
 module.exports = {
   attemptPurchase
 };
+
+

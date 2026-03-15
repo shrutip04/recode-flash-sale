@@ -14,6 +14,8 @@ const orderRoutes = require("./routes/orderRoutes");
 
 const dashboardRoutes = require("./routes/dashboardRoutes");
 
+const { initSocket } = require("./sockets/socketServer");
+
 dotenv.config();
 
 const app = express();
@@ -42,9 +44,11 @@ const PORT = process.env.PORT || 5000;
 async function startServer() {
   console.log("Starting server without DB and Redis for now...");
 
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
+  const server = app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+initSocket(server);
 }
 
 startServer();
