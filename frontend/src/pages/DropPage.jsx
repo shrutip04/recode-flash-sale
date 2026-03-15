@@ -1,25 +1,48 @@
-import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar"
+import ProductCard from "../components/ProductCard"
+import QueueStatus from "../components/QueueStatus"
 
-function DropPage() {
+function DropPage(){
 
-  const navigate = useNavigate();
+const products=[
+{
+name:"Phantom X1",
+price:349,
+description:"Ultra limited sneaker",
+image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff"
+},
+{
+name:"Nova Headset Pro",
+price:199,
+description:"Spatial audio headset",
+image:"https://images.unsplash.com/photo-1518441902110-27c7d3b8b1b1"
+}
+]
 
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
+return(
 
-      <h1 className="text-4xl text-yellow-400 mb-8">
-        Live Drops
-      </h1>
+<div>
 
-      <div
-        onClick={() => navigate("/flash-sale")}
-        className="bg-slate-900 p-6 rounded-xl cursor-pointer hover:scale-105 transition"
-      >
-        🔥 Midnight Sneaker Drop
-      </div>
+<Navbar/>
 
-    </div>
-  );
+<div className="flex gap-10 p-10">
+
+<div className="flex gap-6">
+
+{products.map(p=>(
+<ProductCard product={p}/>
+))}
+
+</div>
+
+<QueueStatus/>
+
+</div>
+
+</div>
+
+)
+
 }
 
-export default DropPage;
+export default DropPage

@@ -1,65 +1,43 @@
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar(){
 
-  const navigate = useNavigate();
-  const [query, setQuery] = useState("");
+return(
 
-  const handleSearch = (e) => {
-    if (e.key === "Enter") {
-      navigate(`/home?search=${query}`);
-    }
-  };
+<nav className="flex justify-between items-center px-8 py-4 border-b border-slate-800">
 
-  return (
-    <div className="w-full bg-slate-900 px-8 py-4 flex items-center justify-between">
+<div className="flex items-center gap-2 font-bold">
 
-      {/* Logo */}
-      <h1
-        onClick={() => navigate("/home")}
-        className="text-yellow-400 text-2xl font-bold cursor-pointer"
-      >
-        FlashDrop
-      </h1>
+⚡ <span>MIDNIGHT</span>
+<span className="neon">DROP</span>
 
-      {/* Search Bar */}
-      <input
-        placeholder="Search products..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        onKeyDown={handleSearch}
-        className="bg-slate-800 px-4 py-2 rounded w-[400px]"
-      />
+</div>
 
-      {/* Navigation */}
-      <div className="flex gap-6">
+<div className="flex gap-10 text-gray-400">
 
-        <button
-          onClick={() => navigate("/home")}
-          className="text-white hover:text-yellow-400"
-        >
-          Home
-        </button>
+<Link to="/">Home</Link>
+<Link to="/drop">The Drop</Link>
+<Link to="/flash-sale">Flash Sale</Link>
+<Link to="/queue">Queue</Link>
 
-        <button
-          onClick={() => navigate("/flash-sale")}
-          className="text-white hover:text-yellow-400"
-        >
-          Drops
-        </button>
+</div>
 
-        <button
-          onClick={() => navigate("/checkout")}
-          className="text-white hover:text-yellow-400"
-        >
-          Cart
-        </button>
+<div className="flex items-center gap-6">
 
-      </div>
+<div className="bg-slate-800 px-3 py-1 rounded text-sm">
+🟢 3,186 live
+</div>
 
-    </div>
-  );
+<Link to="/login" className="secondary-btn">
+Login
+</Link>
+
+</div>
+
+</nav>
+
+)
+
 }
 
-export default Navbar;
+export default Navbar

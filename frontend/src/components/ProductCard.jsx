@@ -1,31 +1,65 @@
-import { useNavigate } from "react-router-dom";
+function ProductCard({product}){
 
-function ProductCard({ product }) {
+return(
 
-  const navigate = useNavigate();
+<div className="card overflow-hidden w-[280px]">
 
-  return (
-    <div
-      onClick={() => navigate(`/product/${product.id}`)}
-      className="bg-slate-900 p-4 rounded-xl hover:scale-105 transition cursor-pointer"
-    >
+<img
+src={product.image}
+className="h-44 w-full object-cover"
+/>
 
-      <img
-      src={product.image || "https://via.placeholder.com/300"}
-      alt={product.name}
-      className="rounded mb-3"
-    />
+<div className="p-4">
 
-      <h3 className="text-lg font-semibold">
-        {product.name}
-      </h3>
+<h3 className="font-semibold mb-1">
 
-      <p className="text-gray-400">
-        ${product.price}
-      </p>
+{product.name}
 
-    </div>
-  );
+</h3>
+
+<p className="text-gray-400 text-sm mb-3">
+
+{product.description}
+
+</p>
+
+<div className="flex justify-between items-center mb-2">
+
+<p className="text-lg font-bold">
+
+${product.price}
+
+</p>
+
+<span className="text-xs bg-cyan-500 text-black px-2 py-1 rounded">
+
+FLASH SALE
+
+</span>
+
+</div>
+
+<div className="h-2 bg-slate-700 rounded mb-3">
+
+<div
+className="h-2 bg-green-400 rounded"
+style={{width:"70%"}}
+/>
+
+</div>
+
+<button className="primary-btn w-full">
+
+ADD TO CART
+
+</button>
+
+</div>
+
+</div>
+
+)
+
 }
 
-export default ProductCard;
+export default ProductCard

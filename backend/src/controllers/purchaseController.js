@@ -1,32 +1,25 @@
 const { attemptPurchase } = require("../services/inventoryService");
-const { createOrder } = require("../models/orderModel");
+const { getIO } = require("../sockets/socketServer");
 
 function purchaseProduct(req, res) {
 
   const { productId } = req.body;
 
-  if (!productId) {
-    return res.status(400).json({
-      success: false,
-      message: "Product ID required"
-    });
-  }
-
   const result = attemptPurchase(productId);
 
-  if (!result.success) {
-    return res.status(400).json(result);
+  if (result.success) {
+
+    const io = getIO();
+
+    io.emit("orderCreated", {
+      productId: productId,
+      remainingStock: result.remainingStock,
+      timestamp: new Date()
+    });
+
   }
 
-  const order = createOrder(productId);
-
-  return res.json({
-    success: true,
-    message: "Purchase successful",
-    orderId: order.id,
-    remainingStock: result.remainingStock
-  });
-
+  res.json(result);
 }
 
 module.exports = {

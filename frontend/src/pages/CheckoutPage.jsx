@@ -1,26 +1,37 @@
-function CheckoutPage() {
+import Navbar from "../components/Navbar";
 
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
+function CheckoutPage(){
 
-      <h1 className="text-4xl text-yellow-400 mb-6">
-        Checkout
-      </h1>
+return(
 
-      <div className="bg-slate-900 p-8 rounded-xl w-[350px]">
+<div>
 
-        <p className="mb-4">Product: Limited Sneakers</p>
+<Navbar/>
 
-        <p className="mb-4">Price: $99</p>
+<div className="flex justify-center pt-20">
 
-        <button className="w-full bg-green-500 py-2 rounded">
-          Pay Now
-        </button>
+<div className="card p-8 w-[600px]">
 
-      </div>
+<h1 className="text-3xl neon mb-6">
+CHECKOUT
+</h1>
 
-    </div>
-  );
+<p className="text-gray-400 mb-4">
+Cart Empty
+</p>
+
+<button className="primary-btn">
+Browse Drops
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+)
+
 }
 
 export default CheckoutPage;

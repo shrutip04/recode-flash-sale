@@ -3,6 +3,6 @@ const router = express.Router();
 
 const { simulateTraffic } = require("../controllers/simulatorController");
 
-router.post("/traffic", simulateTraffic);
+router.post("/", simulateTraffic);
 
 module.exports = router;

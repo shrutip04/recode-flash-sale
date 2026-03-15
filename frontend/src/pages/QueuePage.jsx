@@ -1,29 +1,27 @@
-import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import QueueStatus from "../components/QueueStatus";
+import WaitingQueue from "../components/WaitingQueue";
 
-function QueuePage() {
+function QueuePage(){
 
-  const navigate = useNavigate();
+return(
 
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
+<div>
 
-      <h1 className="text-4xl text-yellow-400 mb-4">
-        Waiting in Queue
-      </h1>
+<Navbar/>
 
-      <p className="text-gray-400 mb-6">
-        Your position: 12
-      </p>
+<div className="flex gap-10 p-10">
 
-      <button
-        onClick={() => navigate("/checkout")}
-        className="bg-yellow-400 px-6 py-2 rounded"
-      >
-        Proceed to Checkout
-      </button>
+<QueueStatus/>
 
-    </div>
-  );
+<WaitingQueue/>
+
+</div>
+
+</div>
+
+)
+
 }
 
 export default QueuePage;

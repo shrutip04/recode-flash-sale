@@ -1,46 +1,54 @@
-import { useNavigate } from "react-router-dom";
+import CategoryCard from "./CategoryCard";
 
-function CategoryRow() {
+function CategoryRow(){
 
-  const navigate = useNavigate();
+const categories = [
 
-  const categories = [
-    { name: "Sneakers", icon: "👟" },
-    { name: "Electronics", icon: "🎧" },
-    { name: "Fashion", icon: "👕" },
-    { name: "Gaming", icon: "🎮" },
-    { name: "Accessories", icon: "⌚" }
-  ];
+{
+title:"Sneakers",
+icon:"👟",
+description:"Limited edition kicks"
+},
 
-  const handleClick = (category) => {
-    navigate(`/home?category=${category}`);
-  };
+{
+title:"Electronics",
+icon:"⚡",
+description:"Cutting edge tech"
+},
 
-  return (
-    <div className="flex justify-center gap-10 py-6 bg-slate-950">
+{
+title:"Collectibles",
+icon:"🎯",
+description:"Rare finds"
+},
 
-      {categories.map((cat) => (
+{
+title:"Apparel",
+icon:"🧥",
+description:"Designer streetwear"
+}
 
-        <div
-          key={cat.name}
-          onClick={() => handleClick(cat.name)}
-          className="flex flex-col items-center cursor-pointer hover:scale-110 transition"
-        >
+]
 
-          <div className="text-3xl mb-1">
-            {cat.icon}
-          </div>
+return(
 
-          <p className="text-sm text-gray-300">
-            {cat.name}
-          </p>
+<div className="flex justify-center gap-6 py-12">
 
-        </div>
+{categories.map((c,i)=>(
 
-      ))}
+<CategoryCard
+key={i}
+title={c.title}
+icon={c.icon}
+description={c.description}
+/>
 
-    </div>
-  );
+))}
+
+</div>
+
+)
+
 }
 
 export default CategoryRow;

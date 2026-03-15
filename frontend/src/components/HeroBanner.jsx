@@ -1,35 +1,48 @@
-import { useNavigate } from "react-router-dom";
+function HeroBanner(){
 
-function HeroBanner() {
-  const navigate = useNavigate();
+return(
 
-  return (
-    <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl p-12 flex items-center justify-between">
+<section className="text-center pt-28 pb-32">
 
-      <div>
-        <h1 className="text-4xl font-bold mb-4">
-          Big Deals This Week
-        </h1>
+<h1 className="text-7xl font-bold tracking-widest">
 
-        <p className="mb-6 text-lg">
-          Discover limited products and exclusive drops.
-        </p>
+THE MIDNIGHT
 
-        <button
-          onClick={() => navigate("/flash-sale")}
-          className="bg-yellow-400 text-black px-6 py-2 rounded-lg font-semibold"
-        >
-          Explore Drops
-        </button>
-      </div>
+</h1>
 
-      <img
-        src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db"
-        className="w-[350px] rounded-xl"
-      />
+<h1 className="text-7xl neon font-bold mb-6">
 
-    </div>
-  );
+PRODUCT DROP
+
+</h1>
+
+<p className="text-gray-400 max-w-xl mx-auto mb-10">
+
+Thousands arrive. Only a few leave with the prize.
+When the clock hits zero, the gate opens.
+
+</p>
+
+<div className="flex justify-center gap-6">
+
+<button className="primary-btn">
+
+ENTER THE DROP →
+
+</button>
+
+<button className="secondary-btn">
+
+VIEW PRODUCTS
+
+</button>
+
+</div>
+
+</section>
+
+)
+
 }
 
-export default HeroBanner;
+export default HeroBanner

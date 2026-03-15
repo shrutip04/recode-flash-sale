@@ -1,8 +1,8 @@
-let io = null;
+const { Server } = require("socket.io");
 
-function initSocket(server) {
+let io;
 
-  const { Server } = require("socket.io");
+const initSocket = (server) => {
 
   io = new Server(server, {
     cors: {
@@ -11,27 +11,20 @@ function initSocket(server) {
   });
 
   io.on("connection", (socket) => {
-    console.log("User connected:", socket.id);
+    console.log("Client connected:", socket.id);
 
     socket.on("disconnect", () => {
-      console.log("User disconnected:", socket.id);
+      console.log("Client disconnected:", socket.id);
     });
   });
 
-}
-
-function broadcastStockUpdate(productId, stock) {
-
-  if (!io) return;
-
-  io.emit("stockUpdate", {
-    productId,
-    stock
-  });
-
-}
-
-module.exports = {
-  initSocket,
-  broadcastStockUpdate
 };
+
+const getIO = () => {
+  if (!io) {
+    throw new Error("Socket.io not initialized");
+  }
+  return io;
+};
+
+module.exports = { initSocket, getIO };

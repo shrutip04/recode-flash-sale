@@ -2,8 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background: radial-gradient(circle at top, #0f172a, #020617);
-  color: white;
-  font-family: system-ui, sans-serif;
+body{
+  background:#05090f;
+  color:white;
+  font-family: 'Inter', sans-serif;
+}
+
+/* grid background */
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:
+  linear-gradient(rgba(0,255,255,0.04) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(0,255,255,0.04) 1px, transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none;
+}
+
+/* neon */
+
+.neon{
+  color:#00e7ff;
+  text-shadow:
+  0 0 6px #00e7ff,
+  0 0 18px #00e7ff;
+}
+
+/* card */
+
+.card{
+  background:#0b1118;
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:14px;
+}
+
+/* buttons */
+
+.primary-btn{
+  background:#00e7ff;
+  color:black;
+  padding:12px 24px;
+  border-radius:8px;
+  font-weight:600;
+}
+
+.primary-btn:hover{
+  box-shadow:0 0 20px #00e7ff;
+}
+
+.secondary-btn{
+  border:1px solid rgba(255,255,255,0.15);
+  padding:12px 24px;
+  border-radius:8px;
 }

@@ -1,34 +1,50 @@
 const { attemptPurchase } = require("../services/inventoryService");
 const { createOrder } = require("../models/orderModel");
+const { getIO } = require("../sockets/socketServer");
 
 function simulateTraffic(req, res) {
 
-  const { productId, buyers } = req.body;
+  const productId = 1;
+  const buyers = 200;
 
-  let success = 0;
-  let failed = 0;
+  const io = getIO();
 
-  for (let i = 0; i < buyers; i++) {
+  let processed = 0;
 
-    const result = attemptPurchase(productId);
+  const interval = setInterval(() => {
 
-    if (result.success) {
-      createOrder(productId);
-      success++;
-    } else {
-      failed++;
+    const burst = Math.floor(Math.random() * 8) + 3;
+
+    for (let i = 0; i < burst && processed < buyers; i++) {
+
+      const result = attemptPurchase(productId);
+
+      if (result.success) {
+
+        createOrder(productId);
+
+        io.emit("orderCreated", {
+          productId,
+          remainingStock: result.remainingStock
+        });
+
+      }
+
+      processed++;
+
     }
 
-  }
+    if (processed >= buyers) {
+      clearInterval(interval);
+    }
+
+  }, 300);
 
   res.json({
-    buyers,
-    successfulPurchases: success,
-    failedAttempts: failed
+    message: "Traffic simulation started",
+    buyers
   });
 
 }
 
-module.exports = {
-  simulateTraffic
-};
+module.exports = { simulateTraffic };
