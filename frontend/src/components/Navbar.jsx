@@ -1,43 +1,46 @@
 import { Link } from "react-router-dom";
 
-function Navbar(){
+function Navbar() {
 
-return(
+  return (
 
-<nav className="flex justify-between items-center px-8 py-4 border-b border-slate-800">
+    <div className="flex justify-between items-center px-10 py-4 border-b border-slate-800">
 
-<div className="flex items-center gap-2 font-bold">
+      <div className="text-xl font-bold text-cyan-400">
+        MIDNIGHTDROP
+      </div>
 
-⚡ <span>MIDNIGHT</span>
-<span className="neon">DROP</span>
+      <div className="flex gap-8 text-sm">
 
-</div>
+        <Link to="/">Home</Link>
 
-<div className="flex gap-10 text-gray-400">
+        <Link to="/drop">The Drop</Link>
 
-<Link to="/">Home</Link>
-<Link to="/drop">The Drop</Link>
-<Link to="/flash-sale">Flash Sale</Link>
-<Link to="/queue">Queue</Link>
+        <Link to="/flash">Flash Sale</Link>
 
-</div>
+        <Link to="/queue">Queue</Link>
 
-<div className="flex items-center gap-6">
+      </div>
 
-<div className="bg-slate-800 px-3 py-1 rounded text-sm">
-🟢 3,186 live
-</div>
+      <div className="flex items-center gap-6">
 
-<Link to="/login" className="secondary-btn">
-Login
-</Link>
+        <div className="bg-slate-800 px-3 py-1 rounded-full text-sm">
+          🟢 3,186 live
+        </div>
 
-</div>
+        <Link
+          to="/login"
+          className="border border-cyan-400 px-4 py-1 rounded"
+        >
+          Login
+        </Link>
 
-</nav>
+      </div>
 
-)
+    </div>
+
+  );
 
 }
 
-export default Navbar
+export default Navbar;
