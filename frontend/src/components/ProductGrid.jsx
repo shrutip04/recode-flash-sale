@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react"
+import { useState, useEffect } from "react"
 import ProductCard from "./ProductCard"
 
 function ProductGrid(){
@@ -98,13 +98,13 @@ return(
 
 <div className="max-w-7xl mx-auto px-10 pb-20">
 
-<h2 className="text-3xl mb-8 text-center">
+<h2 className="text-3xl mb-8 text-center text-white">
 TONIGHT'S <span className="text-cyan-400">DROPS</span>
 </h2>
 
 <div className="grid grid-cols-4 gap-6">
 
-{products.map(product =>(
+{products.map(product => (
 
 <ProductCard
 key={product.id}

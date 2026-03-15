@@ -1,78 +1,77 @@
-import { useState } from "react"
 import { useCart } from "../context/CartContext"
 
-function ProductCard({product}){
+function ProductCard({ product, reduceStock }) {
 
-const { addToCart } = useCart()
+  const { addToCart } = useCart()
 
-const [stock,setStock] = useState(product.stock)
+  const stockPercent = (product.stock / product.totalStock) * 100
 
-const stockPercent = (stock/product.totalStock)*100
+  return (
 
-return(
+    <div className="w-[280px] bg-[#0b0f14] border border-[#1f2937] rounded-xl overflow-hidden
+    transition-all duration-300
+    hover:border-cyan-400
+    hover:shadow-[0_0_25px_rgba(34,211,238,0.35)]
+    hover:-translate-y-1">
 
-<div className="bg-[#0b0f14] border border-[#1f2937] rounded-xl overflow-hidden w-[280px]">
+      <img
+        src={product.image}
+        className="h-44 w-full object-cover transition-transform duration-300 hover:scale-105"
+      />
 
-<img
-src={product.image}
-className="h-44 w-full object-cover"
-/>
+      <div className="p-4">
 
-<div className="p-4">
+        <h3 className="font-semibold text-white mb-1">
+          {product.name}
+        </h3>
 
-<h3 className="font-semibold mb-1">
-{product.name}
-</h3>
+        <p className="text-gray-400 text-sm mb-3">
+          {product.description}
+        </p>
 
-<p className="text-gray-400 text-sm mb-3">
-{product.description}
-</p>
+        <div className="flex justify-between items-center mb-2">
 
-<div className="flex justify-between items-center mb-2">
+          <p className="text-lg font-bold text-white">
+            ${product.price}
+          </p>
 
-<p className="text-lg font-bold">
-${product.price}
-</p>
+          <span className="text-xs bg-cyan-500 text-black px-2 py-1 rounded">
+            FLASH SALE
+          </span>
 
-<span className="text-xs bg-cyan-500 text-black px-2 py-1 rounded">
-FLASH SALE
-</span>
+        </div>
 
-</div>
+        <p className="text-xs text-gray-400 mb-1">
+          {product.stock}/{product.totalStock} remaining
+        </p>
 
-<p className="text-xs text-gray-400 mb-1">
-{stock}/{product.totalStock} remaining
-</p>
+        <div className="h-2 bg-slate-700 rounded mb-3">
 
-<div className="h-2 bg-slate-700 rounded mb-3">
+          <div
+            className="h-2 bg-green-400 rounded transition-all shadow-[0_0_10px_rgba(74,222,128,0.7)]"
+            style={{ width: `${stockPercent}%` }}
+          />
 
-<div
-className="h-2 bg-green-400 rounded transition-all"
-style={{width:`${stockPercent}%`}}
-/>
+        </div>
 
-</div>
+        <button
+          onClick={() => {
+            addToCart(product)
+            reduceStock(product.id)
+          }}
+          className="bg-cyan-500 w-full py-2 rounded text-black font-semibold
+          transition-all duration-300
+          hover:bg-cyan-400
+          hover:shadow-[0_0_15px_rgba(34,211,238,0.6)]"
+        >
+          ADD TO CART
+        </button>
 
-<button
-onClick={()=>{
+      </div>
 
-addToCart(product)
+    </div>
 
-setStock(prev=> prev>0 ? prev-1 : 0)
-
-}}
-className="bg-cyan-500 w-full py-2 rounded text-black font-semibold"
->
-
-ADD TO CART
-
-</button>
-
-</div>
-
-</div>
-
-)
+  )
 
 }
 

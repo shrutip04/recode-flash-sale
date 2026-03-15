@@ -7,13 +7,13 @@ const { cartItems } = useCart()
 
 return(
 
-<div className="flex justify-between items-center px-10 py-4 border-b border-slate-800">
+<div className="flex justify-between items-center px-10 py-4 border-b border-slate-800 bg-[#0b0f14]">
 
 <div className="text-xl font-bold text-cyan-400">
 MIDNIGHTDROP
 </div>
 
-<div className="flex gap-8 text-sm">
+<div className="flex gap-8 text-sm text-gray-300">
 
 <Link to="/">Home</Link>
 <Link to="/drop">The Drop</Link>
@@ -34,9 +34,14 @@ MIDNIGHTDROP
 
 <Link
 to="/login"
-className="border border-cyan-400 px-4 py-1 rounded"
+className="border border-cyan-400 px-4 py-1 rounded
+hover:bg-cyan-400 hover:text-black
+transition-all duration-300
+hover:shadow-[0_0_12px_rgba(34,211,238,0.6)]"
 >
+
 Login
+
 </Link>
 
 </div>
