@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import ProductCard from "./ProductCard"
 
-function ProductGrid(){
+function ProductGrid({ dropLive }){
 
 const initialProducts = [
 
@@ -96,13 +96,13 @@ product.id === productId && product.stock > 0
 
 return(
 
-<div className="max-w-7xl mx-auto px-10 pb-20">
+<div className="max-w-[1200px] mx-auto px-6 pb-20">
 
-<h2 className="text-3xl mb-8 text-center text-white">
+<h2 className="text-3xl mb-10 text-center text-white">
 TONIGHT'S <span className="text-cyan-400">DROPS</span>
 </h2>
 
-<div className="grid grid-cols-4 gap-6">
+<div className="grid grid-cols-4 gap-8 justify-items-center">
 
 {products.map(product => (
 
@@ -110,6 +110,7 @@ TONIGHT'S <span className="text-cyan-400">DROPS</span>
 key={product.id}
 product={product}
 reduceStock={reduceStock}
+dropLive={dropLive}
 />
 
 ))}

@@ -1,47 +1,62 @@
 import { useEffect, useState } from "react"
 
-function CountdownTimer({ targetTime }) {
+function CountdownTimer({ setDropLive }){
 
-  const calculate = () => {
-    const diff = new Date(targetTime) - new Date()
-    if (diff <= 0) return null
+const [timeLeft,setTimeLeft] = useState(60)
 
-    return {
-      hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-      minutes: Math.floor((diff / 1000 / 60) % 60),
-      seconds: Math.floor((diff / 1000) % 60)
-    }
-  }
+useEffect(()=>{
 
-  const [timeLeft,setTimeLeft] = useState(calculate())
+const timer = setInterval(()=>{
 
-  useEffect(()=>{
-    const timer = setInterval(()=>{
-      setTimeLeft(calculate())
-    },1000)
+setTimeLeft(prev => {
 
-    return ()=> clearInterval(timer)
-  },[])
+if(prev <= 1){
 
-  if(!timeLeft){
-    return(
-      <div className="text-green-400 text-xl text-center mb-8">
-        DROP IS LIVE
-      </div>
-    )
-  }
+setDropLive(true)
+return 0
 
-  return(
+}
 
-    <div className="flex justify-center gap-6 mb-10 text-xl">
+return prev - 1
 
-      <div>{timeLeft.hours}h</div>
-      <div>{timeLeft.minutes}m</div>
-      <div>{timeLeft.seconds}s</div>
+})
 
-    </div>
+},1000)
 
-  )
+return ()=> clearInterval(timer)
+
+},[])
+
+if(timeLeft === 0){
+
+return(
+
+<div className="text-green-400 text-xl text-center mb-10">
+DROP IS LIVE
+</div>
+
+)
+
+}
+
+const minutes = Math.floor(timeLeft/60)
+const seconds = timeLeft % 60
+
+return(
+
+<div className="flex justify-center gap-8 text-3xl text-cyan-400 mb-12">
+
+<div className="bg-[#0b0f14] border border-cyan-400 px-6 py-3 rounded-lg">
+{minutes}m
+</div>
+
+<div className="bg-[#0b0f14] border border-cyan-400 px-6 py-3 rounded-lg">
+{seconds}s
+</div>
+
+</div>
+
+)
 
 }
 

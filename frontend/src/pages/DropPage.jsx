@@ -1,46 +1,47 @@
+import { useState } from "react"
 import Navbar from "../components/Navbar"
 import ProductGrid from "../components/ProductGrid"
 import QueueStatus from "../components/QueueStatus"
 import LiveQueueFeed from "../components/LiveQueueFeed"
-import LivePurchaseFeed from "../components/LivePurchaseFeed"
 import CountdownTimer from "../components/CountdownTimer"
 
-function DropPage() {
+function DropPage(){
 
-  return (
+const [dropLive,setDropLive] = useState(false)
 
-    <div className="min-h-screen bg-[#0b0f14] text-white">
+return(
 
-      <Navbar />
+<div className="min-h-screen bg-[#0b0f14] text-white">
 
-      <div className="max-w-7xl mx-auto px-10 py-16 grid grid-cols-3 gap-10">
+<Navbar/>
 
-        <div className="col-span-2">
+<div className="max-w-7xl mx-auto px-10 py-16 grid grid-cols-3 gap-10">
 
-          <h1 className="text-4xl mb-10">
-            PRODUCT <span className="text-cyan-400">DROP</span>
-          </h1>
+<div className="col-span-2">
 
-          <ProductGrid />
+<h1 className="text-4xl mb-6">
+PRODUCT <span className="text-cyan-400">DROP</span>
+</h1>
 
-        </div>
+<CountdownTimer setDropLive={setDropLive}/>
 
-        <div className="space-y-6">
+<ProductGrid dropLive={dropLive}/>
 
-          <QueueStatus />
+</div>
 
-          <LiveQueueFeed />
-          <LivePurchaseFeed/>
+<div className="space-y-6">
 
-        </div>
+<QueueStatus/>
+<LiveQueueFeed/>
 
-      </div>
+</div>
 
-    </div>
+</div>
 
-  )
+</div>
+
+)
 
 }
 
-<LivePurchaseFeed/>
 export default DropPage
