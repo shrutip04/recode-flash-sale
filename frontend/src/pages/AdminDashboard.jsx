@@ -1,84 +1,93 @@
-import { useEffect, useState } from "react";
-import socket from "../sockets/socketClient";
-import StockChart from "../components/StockChart";
+import { useEffect, useState } from "react"
+import socket from "../sockets/socketClient"
+import StockChart from "../components/StockChart"
+import Navbar from "../components/Navbar"
 
 function AdminDashboard() {
 
-  const [orders, setOrders] = useState([]);
-  const [totalOrders, setTotalOrders] = useState(0);
+  const [orders, setOrders] = useState([])
+  const [totalOrders, setTotalOrders] = useState(0)
 
   const simulateTraffic = async () => {
 
     await fetch("http://localhost:5000/api/simulate", {
       method: "POST"
-    });
+    })
 
-  };
+  }
 
   useEffect(() => {
 
-    socket.on("orderCreated", (order) => {
+    const handler = (order) => {
 
-      setOrders(prev => [order, ...prev].slice(0, 10));
-      setTotalOrders(prev => prev + 1);
+      setOrders(prev => [order, ...prev].slice(0, 10))
+      setTotalOrders(prev => prev + 1)
 
-    });
+    }
 
-    return () => socket.off("orderCreated");
+    socket.on("orderCreated", handler)
 
-  }, []);
+    return () => socket.off("orderCreated", handler)
+
+  }, [])
 
   return (
 
-    <div className="min-h-screen bg-slate-900 text-white p-10">
+    <div className="min-h-screen bg-[#0b0f14] text-white">
 
-      <h1 className="text-3xl font-bold text-yellow-400 mb-10">
-        RECODE Flash Sale Admin Dashboard
-      </h1>
+      <Navbar />
 
-      <button
-        onClick={simulateTraffic}
-        className="bg-red-500 px-6 py-3 rounded-lg font-semibold mb-10"
-      >
-        Simulate 200 Buyers
-      </button>
+      <div className="p-10">
 
-      <div className="grid grid-cols-2 gap-8 mb-10">
+        <h1 className="text-3xl font-bold text-yellow-400 mb-10">
+          RECODE Flash Sale Admin Dashboard
+        </h1>
 
-        <div className="bg-slate-800 p-6 rounded-xl">
+        <button
+          onClick={simulateTraffic}
+          className="bg-red-500 px-6 py-3 rounded-lg font-semibold mb-10"
+        >
+          Simulate 200 Buyers
+        </button>
 
-          <h2 className="text-xl mb-2">
-            Total Orders
-          </h2>
+        <div className="grid grid-cols-2 gap-8 mb-10">
 
-          <p className="text-4xl text-green-400">
-            {totalOrders}
-          </p>
+          <div className="bg-slate-800 p-6 rounded-xl">
+
+            <h2 className="text-xl mb-2">
+              Total Orders
+            </h2>
+
+            <p className="text-4xl text-green-400">
+              {totalOrders}
+            </p>
+
+          </div>
+
+          <StockChart />
 
         </div>
 
-        <StockChart />
+        <div className="bg-slate-800 p-6 rounded-xl">
 
-      </div>
+          <h2 className="text-xl mb-4">
+            Live Order Activity
+          </h2>
 
-      <div className="bg-slate-800 p-6 rounded-xl">
+          <div className="space-y-3">
 
-        <h2 className="text-xl mb-4">
-          Live Order Activity
-        </h2>
+            {orders.map((order, index) => (
 
-        <div className="space-y-3">
+              <div
+                key={index}
+                className="bg-slate-700 p-3 rounded"
+              >
+                Product #{order.productId} purchased — stock left: {order.remainingStock}
+              </div>
 
-          {orders.map((order, index) => (
+            ))}
 
-            <div
-              key={index}
-              className="bg-slate-700 p-3 rounded"
-            >
-              Product #{order.productId} purchased — stock left: {order.remainingStock}
-            </div>
-
-          ))}
+          </div>
 
         </div>
 
@@ -86,8 +95,8 @@ function AdminDashboard() {
 
     </div>
 
-  );
+  )
 
 }
 
-export default AdminDashboard;
+export default AdminDashboard

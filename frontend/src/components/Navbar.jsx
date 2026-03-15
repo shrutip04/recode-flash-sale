@@ -62,6 +62,8 @@ function Navbar() {
             Login
           </Link>
 
+          <Link to="/checkout">🛒</Link>
+
         </div>
 
       </div>

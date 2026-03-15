@@ -1,12 +1,12 @@
-import Navbar from "../components/Navbar";
-import QueueStatus from "../components/QueueStatus";
-import LiveQueueFeed from "../components/LiveQueueFeed";
+import Navbar from "../components/Navbar"
+import QueueStatus from "../components/QueueStatus"
+import LiveQueueFeed from "../components/LiveQueueFeed"
 
 function QueuePage() {
 
   return (
 
-    <div className="grid-bg min-h-screen">
+    <div className="min-h-screen bg-[#0b0f14] text-white">
 
       <Navbar />
 
@@ -20,8 +20,8 @@ function QueuePage() {
 
     </div>
 
-  );
+  )
 
 }
 
-export default QueuePage;
+export default QueuePage

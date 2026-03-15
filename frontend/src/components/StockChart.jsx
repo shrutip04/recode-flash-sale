@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import socket from "../sockets/socketClient";
+import { useEffect, useState } from "react"
+import socket from "../sockets/socketClient"
 
 import {
   LineChart,
@@ -7,58 +7,66 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  CartesianGrid
-} from "recharts";
+  CartesianGrid,
+  ResponsiveContainer
+} from "recharts"
 
 function StockChart() {
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([])
 
   useEffect(() => {
 
-    socket.on("stockUpdate", (update) => {
+    const handler = (update) => {
 
       setData(prev => [
-        ...prev,
+        ...prev.slice(-20),
         {
           time: new Date().toLocaleTimeString(),
           stock: update.newStock
         }
-      ]);
+      ])
 
-    });
+    }
 
-    return () => socket.off("stockUpdate");
+    socket.on("stockUpdate", handler)
 
-  }, []);
+    return () => socket.off("stockUpdate", handler)
+
+  }, [])
 
   return (
 
-    <div className="bg-slate-800 p-6 rounded-xl">
+    <div className="bg-[#0b0f14] border border-[#1f2937] p-6 rounded-xl">
 
-      <h2 className="text-xl mb-4 text-yellow-400">
+      <h2 className="text-xl mb-6 text-yellow-400 font-semibold">
         Live Stock Drop
       </h2>
 
-      <LineChart width={600} height={300} data={data}>
+      <ResponsiveContainer width="100%" height={300}>
 
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="time" />
-        <YAxis />
-        <Tooltip />
+        <LineChart data={data}>
 
-        <Line
-          type="monotone"
-          dataKey="stock"
-          stroke="#22c55e"
-        />
+          <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" />
+          <XAxis dataKey="time" stroke="#9ca3af" />
+          <YAxis stroke="#9ca3af" />
+          <Tooltip />
 
-      </LineChart>
+          <Line
+            type="monotone"
+            dataKey="stock"
+            stroke="#22c55e"
+            strokeWidth={2}
+          />
+
+        </LineChart>
+
+      </ResponsiveContainer>
 
     </div>
 
-  );
+  )
 
 }
 
-export default StockChart;
+export default StockChart

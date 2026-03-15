@@ -2,11 +2,11 @@ function LoginPage() {
 
   return (
 
-    <div className="flex justify-center items-center min-h-screen grid-bg">
+    <div className="flex justify-center items-center min-h-screen bg-[#0b0f14]">
 
       <div className="bg-slate-800 p-10 rounded-xl w-96">
 
-        <h1 className="text-2xl mb-6 text-center">
+        <h1 className="text-2xl mb-6 text-center text-cyan-400">
           SIGN IN
         </h1>
 
@@ -21,7 +21,7 @@ function LoginPage() {
           placeholder="Password"
         />
 
-        <button className="primary-btn w-full">
+        <button className="w-full bg-cyan-500 py-2 rounded">
           ENTER
         </button>
 
@@ -29,8 +29,8 @@ function LoginPage() {
 
     </div>
 
-  );
+  )
 
 }
 
-export default LoginPage;
+export default LoginPage

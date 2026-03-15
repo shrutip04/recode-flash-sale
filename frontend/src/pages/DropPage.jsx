@@ -1,13 +1,14 @@
-import Navbar from "../components/Navbar";
-import ProductGrid from "../components/ProductGrid";
-import QueueStatus from "../components/QueueStatus";
-import LiveQueueFeed from "../components/LiveQueueFeed";
+import Navbar from "../components/Navbar"
+import ProductGrid from "../components/ProductGrid"
+import QueueStatus from "../components/QueueStatus"
+import LiveQueueFeed from "../components/LiveQueueFeed"
+import LivePurchaseFeed from "../components/LivePurchaseFeed"
 
 function DropPage() {
 
   return (
 
-    <div>
+    <div className="min-h-screen bg-[#0b0f14] text-white">
 
       <Navbar />
 
@@ -16,7 +17,7 @@ function DropPage() {
         <div className="col-span-2">
 
           <h1 className="text-4xl mb-10">
-            PRODUCT <span className="neon">DROP</span>
+            PRODUCT <span className="text-cyan-400">DROP</span>
           </h1>
 
           <ProductGrid />
@@ -28,6 +29,7 @@ function DropPage() {
           <QueueStatus />
 
           <LiveQueueFeed />
+          <LivePurchaseFeed/>
 
         </div>
 
@@ -35,8 +37,8 @@ function DropPage() {
 
     </div>
 
-  );
+  )
 
 }
 
-export default DropPage;
+export default DropPage

@@ -1,21 +1,26 @@
 import Navbar from "../components/Navbar"
-import ProductCard from "../components/ProductCard"
+import FlashBanner from "../components/FlashBanner"
+import ProductGrid from "../components/ProductGrid"
 
 function FlashSale(){
 
-return(
+  return(
 
-<div>
+    <div className="min-h-screen bg-[#0b0f14] text-white">
 
-<Navbar/>
+      <Navbar/>
 
-<h1 className="text-4xl neon p-10">
-FLASH SALE
-</h1>
+      <FlashBanner/>
 
-</div>
+      <h1 className="text-4xl text-center py-10 text-cyan-400">
+        FLASH SALE
+      </h1>
 
-)
+      <ProductGrid/>
+
+    </div>
+
+  )
 
 }
 

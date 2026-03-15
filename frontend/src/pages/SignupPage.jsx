@@ -1,16 +1,16 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 
 function SignupPage() {
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleSignup = () => {
-    // later this will call backend API
-    navigate("/");
-  };
+    navigate("/")
+  }
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+
+    <div className="min-h-screen flex items-center justify-center bg-[#0b0f14]">
 
       <div className="bg-slate-900 p-10 rounded-xl w-[350px] text-center">
 
@@ -45,7 +45,7 @@ function SignupPage() {
           Already have an account?{" "}
           <span
             className="text-yellow-400 cursor-pointer"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/login")}
           >
             Login
           </span>
@@ -54,7 +54,9 @@ function SignupPage() {
       </div>
 
     </div>
-  );
+
+  )
+
 }
 
-export default SignupPage;
+export default SignupPage
