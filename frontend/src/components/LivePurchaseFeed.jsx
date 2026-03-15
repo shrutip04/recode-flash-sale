@@ -1,51 +1,49 @@
-import { useEffect, useState } from "react"
-import socket from "../sockets/socketClient"
+import { useState,useEffect } from "react"
 
 function LivePurchaseFeed(){
 
-  const [events,setEvents] = useState([])
+const [feed,setFeed] = useState([])
 
-  useEffect(()=>{
+useEffect(()=>{
 
-    const handler = (order)=>{
+const interval = setInterval(()=>{
 
-      const item = {
-        id: Math.random(),
-        text: `User bought product #${order.productId}`,
-        time: new Date().toLocaleTimeString()
-      }
+const users = ["USR-21A","USR-81K","USR-441","USR-92Z"]
 
-      setEvents(prev => [item,...prev].slice(0,5))
+const products = [
+"Phantom X1",
+"Nova Headset",
+"Stealth Hoodie",
+"Cyber Chrono"
+]
 
-    }
+const event = `${users[Math.floor(Math.random()*4)]} bought ${products[Math.floor(Math.random()*4)]}`
 
-    socket.on("orderCreated",handler)
+setFeed(prev => [event,...prev].slice(0,5))
 
-    return ()=> socket.off("orderCreated",handler)
+},3000)
 
-  },[])
+return ()=> clearInterval(interval)
 
-  return(
+},[])
 
-    <div className="fixed bottom-6 left-6 w-72 bg-[#0b0f14] border border-[#1f2937] rounded-xl p-4 shadow-lg">
+return(
 
-      <p className="text-sm text-cyan-400 mb-3">
-        Live Purchases
-      </p>
+<div className="fixed bottom-6 left-6 w-72 bg-slate-800 p-4 rounded-xl">
 
-      <div className="space-y-2 text-xs text-gray-300">
+<p className="text-sm text-cyan-400 mb-2">
+Live Purchases
+</p>
 
-        {events.map(e=>(
-          <div key={e.id} className="bg-slate-800 p-2 rounded">
-            {e.text}
-          </div>
-        ))}
+{feed.map((f,i)=>(
+<div key={i} className="text-xs text-gray-300">
+{f}
+</div>
+))}
 
-      </div>
+</div>
 
-    </div>
-
-  )
+)
 
 }
 

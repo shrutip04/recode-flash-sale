@@ -42,4 +42,5 @@ function DropPage() {
 
 }
 
+<LivePurchaseFeed/>
 export default DropPage

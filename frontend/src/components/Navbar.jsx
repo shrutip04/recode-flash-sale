@@ -1,76 +1,49 @@
 import { Link } from "react-router-dom"
+import { useCart } from "../context/CartContext"
 
-function Navbar() {
+function Navbar(){
 
-  return (
+const { cartItems } = useCart()
 
-    <header className="w-full border-b border-[#1f2937] bg-[#0b0f14]">
+return(
 
-      <div className="max-w-[1200px] mx-auto flex justify-between items-center px-6 py-4">
+<div className="flex justify-between items-center px-10 py-4 border-b border-slate-800">
 
-        {/* Logo */}
-        <div className="text-xl font-bold tracking-wider text-cyan-400">
-          MIDNIGHTDROP
-        </div>
+<div className="text-xl font-bold text-cyan-400">
+MIDNIGHTDROP
+</div>
 
-        {/* Navigation */}
-        <nav className="flex gap-8 text-sm text-gray-300">
+<div className="flex gap-8 text-sm">
 
-          <Link
-            to="/"
-            className="hover:text-cyan-400 transition-colors"
-          >
-            Home
-          </Link>
+<Link to="/">Home</Link>
+<Link to="/drop">The Drop</Link>
+<Link to="/flash">Flash Sale</Link>
+<Link to="/queue">Queue</Link>
 
-          <Link
-            to="/drop"
-            className="hover:text-cyan-400 transition-colors"
-          >
-            The Drop
-          </Link>
+</div>
 
-          <Link
-            to="/flash"
-            className="hover:text-cyan-400 transition-colors"
-          >
-            Flash Sale
-          </Link>
+<div className="flex items-center gap-6">
 
-          <Link
-            to="/queue"
-            className="hover:text-cyan-400 transition-colors"
-          >
-            Queue
-          </Link>
+<div className="bg-slate-800 px-3 py-1 rounded-full text-sm">
+🟢 3,186 live
+</div>
 
-        </nav>
+<Link to="/checkout">
+🛒 {cartItems.length}
+</Link>
 
-        {/* Right side */}
-        <div className="flex items-center gap-6">
+<Link
+to="/login"
+className="border border-cyan-400 px-4 py-1 rounded"
+>
+Login
+</Link>
 
-          {/* Live users */}
-          <div className="bg-[#111827] border border-[#1f2937] px-3 py-1 rounded-full text-sm text-gray-300">
-            🟢 3,186 live
-          </div>
+</div>
 
-          {/* Login */}
-          <Link
-            to="/login"
-            className="border border-cyan-400 text-cyan-400 px-4 py-1 rounded-lg text-sm hover:bg-cyan-400 hover:text-black transition-all"
-          >
-            Login
-          </Link>
+</div>
 
-          <Link to="/checkout">🛒</Link>
-
-        </div>
-
-      </div>
-
-    </header>
-
-  )
+)
 
 }
 
