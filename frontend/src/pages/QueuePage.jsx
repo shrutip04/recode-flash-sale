@@ -1,26 +1,26 @@
 import Navbar from "../components/Navbar";
 import QueueStatus from "../components/QueueStatus";
-import WaitingQueue from "../components/WaitingQueue";
+import LiveQueueFeed from "../components/LiveQueueFeed";
 
-function QueuePage(){
+function QueuePage() {
 
-return(
+  return (
 
-<div>
+    <div className="grid-bg min-h-screen">
 
-<Navbar/>
+      <Navbar />
 
-<div className="flex gap-10 p-10">
+      <div className="max-w-5xl mx-auto py-20 space-y-10">
 
-<QueueStatus/>
+        <QueueStatus />
 
-<WaitingQueue/>
+        <LiveQueueFeed />
 
-</div>
+      </div>
 
-</div>
+    </div>
 
-)
+  );
 
 }
 
