@@ -1,5 +1,3 @@
-
-```md
 # ⚡ RECODE: Midnight Drop Engine  
 ### 🧠 High-Concurrency Flash Sale System | Race-Condition Safe Architecture
 
@@ -11,12 +9,12 @@
 
 Flash sales don’t fail by crashing — they fail silently.
 
-❌ Overselling inventory  
-❌ Negative stock values  
-❌ Duplicate successful purchases  
-❌ Users paying for unavailable products  
+- ❌ Overselling inventory  
+- ❌ Negative stock values  
+- ❌ Duplicate successful purchases  
+- ❌ Users paying for unavailable products  
 
-💥 Root Cause: **Race conditions under concurrent access**
+💥 **Root Cause:** Race conditions under concurrent access
 
 ---
 
@@ -24,140 +22,67 @@ Flash sales don’t fail by crashing — they fail silently.
 
 Design a system that survives extreme traffic spikes while ensuring:
 
-- 🟢 **Strict inventory consistency**
-- 🟢 **Fair allocation (first valid buyers win)**
-- 🟢 **Zero overselling**
-- 🟢 **Graceful rejection of excess users**
-- 🟢 **System stability under load**
+- 🟢 Strict inventory consistency  
+- 🟢 Fair allocation (first valid buyers win)  
+- 🟢 Zero overselling  
+- 🟢 Graceful rejection of excess users  
+- 🟢 System stability under load  
 
 ---
 
-## 🏗️ System Flow
+User → API → Purchase Service → Inventory Gate → Order / Reject
 
-```
-
-User → API → ⚙️ Purchase Service → 🔐 Inventory Gate → ✅ Order / ❌ Reject
-
-````
 
 ---
 
 ## 🔐 The Core — Inventory Gate
 
-> The system’s most critical component.
+Every purchase request passes through a controlled execution layer.
 
-Every purchase request must pass through a controlled execution layer.
-
-### ❌ Naive Approach (Not Safe in Concurrency)
+### ❌ Naive Approach
 
 ```js
 if (stock > 0) {
     processOrder();
     stock--;
-} else {
-    rejectRequest();
 }
-````
-
-⚠️ Under high concurrency, multiple requests read the same stock → overselling happens.
-
 ---
+⚠️ Multiple requests read same stock → overselling
 
-## ⚙️ Our Solution
 
-### 🧵 1. Controlled Access Layer
+⚙️ Solution
+🧵 Controlled access (no parallel writes)
+📥 FIFO request handling
+🧮 Atomic inventory updates
+🔄 Real-time updates via WebSockets
+🚀 Features
+⚡ Flash sale drop engine
+🔐 Concurrency-safe inventory gate
+🔄 Live stock updates
+📊 Real-time purchase feed
+🧪 Traffic simulator
+🌐 Deployed on Vercel + Render
+🧪 Simulation
+simulateBuyers(1, 100)
+📊 Result
+Buyers	Stock	Success	Rejected
+100	20	20	80
+✅ Guarantees
+No negative inventory
+Exact allocation
+No duplicate orders
+Clean failure handling
+🧰 Tech Stack
 
-* Only one request can modify inventory at a time
-* Prevents simultaneous stock updates
+React • Node.js • WebSockets • Vercel • Render
 
-### 📥 2. FIFO Queue Processing
+💡 Insight
 
-* Requests handled in order of arrival
-* Ensures fairness under heavy load
+Systems don’t fail when they crash.
+They fail when they return wrong results under load.
 
-### 🧮 3. Atomic Operations
+👩‍💻 Built In
 
-* Inventory updates happen as a single unit
-* No intermediate inconsistent states
+19-hour hackathon • Focus: Concurrency & System Design
 
-### 🔄 4. Real-Time Sync
-
-* WebSockets push live stock updates
-* Eliminates stale UI data
-
----
-
-## 🚀 Features
-
-* ⚡ Timed Flash Sale Engine
-* 🔐 Concurrency-Safe Inventory Gate
-* 🔄 Real-Time Stock Updates (WebSockets)
-* 📊 Live Purchase Feed
-* 🧪 Traffic Simulator
-* 🌐 Cloud Deployment (Vercel + Render)
-
----
-
-## 🧪 Traffic Simulation
-
-```js
-simulateBuyers(productId = 1, buyers = 100)
-```
-
----
-
-## 📊 System Behavior Under Load
-
-| 👥 Buyers | 📦 Stock | ✅ Success | ❌ Rejected |
-| --------- | -------- | --------- | ---------- |
-| 100       | 20       | 20        | 80         |
-
----
-
-## ✅ Guarantees
-
-✔ Inventory never goes negative
-✔ Exactly N successful orders for N stock
-✔ No duplicate purchases
-✔ Clean rejection for excess buyers
-
----
-
-## 🧠 What This Demonstrates
-
-* 🔥 Real-world race condition handling
-* ⚙️ Practical concurrency control
-* 🏗️ Strong backend system design
-* 📈 Stability under burst traffic scenarios
-
----
-
-## 🧰 Tech Stack
-
-* ⚛️ Frontend: React
-* 🟢 Backend: Node.js
-* 🔄 Realtime: WebSockets
-* ☁️ Deployment: Vercel + Render
-
----
-
-## 💡 Key Insight
-
-> Systems don’t break when they crash.
-> They break when they give the wrong results under pressure.
-
----
-
-## 👩‍💻 Built For
-
-🏁 Hackathon Project — Built in 19 hours
-🎯 Focus: Concurrency • Consistency • System Design
-
----
-
-# ⚡ RECODE
-
-### Because correctness > speed in distributed systems
-
-```
-```
+## 🏗️ System Flow
