@@ -1,4 +1,3 @@
-Got it 😭 — no extra talk, no breaks, just clean copy-paste. Use this exactly:
 
 ```md
 # ⚡ RECODE: Midnight Drop Engine  
