@@ -1,88 +1,146 @@
-# ⚡ RECODE: Midnight Drop Engine  
-### 🧠 High-Concurrency Flash Sale System | Race-Condition Safe Architecture
-
-> 🕛 Thousands arrive at midnight. Only a few should succeed — correctly.
-
----
-
-## 🚨 The Problem
-
-Flash sales don’t fail by crashing — they fail silently.
-
-- ❌ Overselling inventory  
-- ❌ Negative stock values  
-- ❌ Duplicate successful purchases  
-- ❌ Users paying for unavailable products  
-
-💥 **Root Cause:** Race conditions under concurrent access
-
----
-
-## 🎯 Objective
-
-Design a system that survives extreme traffic spikes while ensuring:
-
-- 🟢 Strict inventory consistency  
-- 🟢 Fair allocation (first valid buyers win)  
-- 🟢 Zero overselling  
-- 🟢 Graceful rejection of excess users  
-- 🟢 System stability under load  
-
----
-
-User → API → Purchase Service → Inventory Gate → Order / Reject
 
 
 ---
 
-## 🔐 The Core — Inventory Gate
+## RECODE — Midnight Drop Engine  
+⚡ RECODE — Midnight Drop Engine  
+### High-Concurrency Flash Sale System · Race-Condition Safe Architecture
 
-Every purchase request passes through a controlled execution layer.
+> Thousands arrive at once. Only a few should succeed — correctly.
 
-### ❌ Naive Approach
+---
+## 🚨 Problem Statement
+
+Flash-sale systems often fail silently under high concurrency:
+
+| Failure Type          | Impact                           |
+|----------------------|----------------------------------|
+| Overselling          | More orders than available stock |
+| Negative Inventory   | Data inconsistency               |
+| Duplicate Purchases  | Same unit sold multiple times    |
+| Invalid Transactions | Users charged incorrectly        |
+
+**Root Cause → Race conditions during concurrent writes**
+
+---
+
+## 🎯 System Requirements
+
+The system must guarantee:
+
+| Constraint          | Expected Behavior                         |
+|--------------------|-------------------------------------------|
+| High Concurrency   | Thousands of simultaneous purchase calls  |
+| Limited Inventory  | Strict stock boundaries                   |
+| Fair Allocation    | First valid buyers succeed                |
+| Data Integrity     | No inconsistent states                    |
+| Graceful Failure   | Clean rejection beyond stock              |
+
+---
+
+## 🏗️ System Flow
+
+```
+
+Client → API Layer → Purchase Service → Inventory Gate → Order / Reject
+
+````
+
+---
+
+## 🔐 Core Mechanism — Inventory Gate
+
+A controlled execution boundary that ensures safe state transitions.
+
+### ❌ Naive Implementation (Unsafe)
 
 ```js
 if (stock > 0) {
     processOrder();
     stock--;
 }
+````
+
+Issue: Multiple requests read the same stock → overselling
+
 ---
-⚠️ Multiple requests read same stock → overselling
 
+## ⚙️ Concurrency Control Strategy
 
-⚙️ Solution
-🧵 Controlled access (no parallel writes)
-📥 FIFO request handling
-🧮 Atomic inventory updates
-🔄 Real-time updates via WebSockets
-🚀 Features
-⚡ Flash sale drop engine
-🔐 Concurrency-safe inventory gate
-🔄 Live stock updates
-📊 Real-time purchase feed
-🧪 Traffic simulator
-🌐 Deployed on Vercel + Render
-🧪 Simulation
+| Component         | Purpose                           |
+| ----------------- | --------------------------------- |
+| Controlled Access | Prevent parallel inventory writes |
+| FIFO Queue        | Maintain request ordering         |
+| Atomic Operations | Ensure consistent state updates   |
+| Real-Time Sync    | Eliminate stale frontend data     |
+
+---
+
+## 🚀 Features
+
+| Feature           | Description                       |
+| ----------------- | --------------------------------- |
+| Flash Sale Engine | Timed product drops               |
+| Inventory Gate    | Concurrency-safe purchase control |
+| WebSocket Updates | Live stock synchronization        |
+| Purchase Feed     | Real-time transactions            |
+| Traffic Simulator | High-load testing                 |
+| Deployment        | Vercel + Render                   |
+
+---
+
+## 🧪 Load Simulation
+
+```js
 simulateBuyers(1, 100)
-📊 Result
-Buyers	Stock	Success	Rejected
-100	20	20	80
-✅ Guarantees
-No negative inventory
-Exact allocation
-No duplicate orders
-Clean failure handling
-🧰 Tech Stack
+```
 
-React • Node.js • WebSockets • Vercel • Render
+---
 
-💡 Insight
+## 📊 System Behavior Under Load
 
-Systems don’t fail when they crash.
-They fail when they return wrong results under load.
+| Buyers | Stock | Success | Rejected |
+| ------ | ----- | ------- | -------- |
+| 100    | 20    | 20      | 80       |
 
-👩‍💻 Built In
+---
 
-19-hour hackathon • Focus: Concurrency & System Design
+## 📈 Result Analysis
 
-## 🏗️ System Flow
+Success Rate   : ██████████░░░░░░░░░░ 20%
+Rejection Rate : ████████████████████ 80%
+
+---
+
+## ✅ System Guarantees
+
+* Inventory never goes negative
+* Exact allocation (N orders for N stock)
+* No duplicate transactions
+* Clean failure handling
+
+---
+
+## 🧰 Tech Stack
+
+React · Node.js · WebSockets · Vercel · Render
+
+---
+
+## 💡 Key Insight
+
+> Systems fail when they produce incorrect results under pressure — not when they crash.
+
+---
+
+## 👩‍💻 Development Context
+
+* Built in 19 hours (Hackathon)
+* Focus: Concurrency · Consistency · System Design
+
+---
+
+# ⚡ RECODE
+
+### Correctness > Speed in Distributed Systems
+
